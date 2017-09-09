@@ -1,0 +1,33 @@
+---
+title: "Mymap"
+author: "Juliet Nantege"
+date: "9/8/2017"
+output: html_document
+---
+## Summary
+Here is a world map showing the big cities and towns that I have visited and the ones I dream of visiting in the future. They are coloured based on the "I have been" for cities i have been to and "I dream of visiting" for those Iam yet to visit. Hover over the markers to see the names of the cities.
+
+```{r setup, echo =FALSE, message=FALSE}
+library(leaflet)
+#creating my dataframe
+label <- c("Kampala", "Nairobi", "Dubai", "Bangkok", "Phuket", "Qatar", "NewYork", "New Jesery", "Dallas", "Atlanta", "Seattle", "Florence", "Capetown", "London", "Nassau", "Maldives", "Paris")
+col <- c(rep("green",11 ), rep("purple", 6))
+lat <- c(0.205149, -1.459511,  25.243989,13.795193, 7.828115, 24.929406, 40.711635, 40.054622, 32.769009, 33.745201, 47.605980, 43.832699, -34.020348, 51.506759, 25.039072, 3.250788, 48.889107)
+lng <- c(32.432888, 37.188235, 55.447540, 100.424940, 98.097726, 51.291611, -74.003489, -74.403404, -96.739054, -84.386055, -122.332831, 11.228607, 18.491498, -0.126355, -77.327892, 73.186992, 2.339729)
+
+status <- c("I have been", "I dream of visiting")
+
+ cities <- data.frame(label, lat, lng, col)
+ 
+ #map generation
+cities %>%
+        leaflet() %>%
+        addTiles() %>%
+        addCircleMarkers(label= label,stroke = TRUE, fillColor = col, col = col, radius = 8, weight = 3, fill = TRUE) %>%
+        addLegend(labels = status, colors = c("green", "purple"))
+
+
+
+
+```
+
